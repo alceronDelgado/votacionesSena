@@ -12,7 +12,7 @@ package votacionessena;
  * Debe decir : que candidato saco la mayor cantidad de votos en una sede = DONE
  * Debe decir: que candidato saco la menor cantidad de votos En una sede = DONE 
  * Debe decir: Cuantos candidatos ESTÁN POR ENCIMA DEL PROMEDIO DE VOTOS y CUANTOS ESTÁN POR DEBAJO
- * PARA SIMULAR LOS VOTOS UTILICE EL MÉTODO RANDOM DONDE TENGA UN ESTIMADO DE MINIMO 10 Y MÁXIMO 1000 VOTOS X SEDE 
+ * PARA SIMULAR LOS VOTOS UTILICE EL MÉTODO RANDOM DONDE TENGA UN ESTIMADO DE MINIMO 10 Y MÁXIMO 1000 VOTOS X SEDE = DONE
  * @author alejandro ceron delgado
  */
 public class VotacionesSena {
@@ -27,35 +27,29 @@ public class VotacionesSena {
         String candidatosArr[] = new String[5];
         String candidatos = "";
         String cantidadVotos = "";
+        int filas = votos.length;
+        int columnas = votos[0].length;
+        int valorCeroCero = votos[0][0];
+        int valorMenor = votos[0][0];
         
-
-        
-        System.out.println(candidatos);
-            
         for(int f=0;f<votos.length;f++){
             //Columnas
             for(int c=0;c<votos[0].length;c++){
                 
-                
                 //Ciclo que permite guardar los números solo si son mayores a 10
                 while(true){
                 
-                    valores = (int) (Math.random()*4);
-                    if(valores > 1){
+                    valores = (int) (Math.random()*1000);
+                    if(valores > 10){
                         votos[f][c] = valores;
                         break;
-                    }
-                    
+                    }        
                 }
-                
             
             }
         }
+
         
-
-
-        int valorCeroCero = votos[0][0];
-        int valorMenor = votos[0][0];
         
         //Calcular mayor y menor
         for(int j=0;j<votos.length;j++){
@@ -71,27 +65,45 @@ public class VotacionesSena {
             }
         }
         
+        
 
-        //Promedio 
-        int promedio[] = new int[7];
         int sumar = 0;
-        //Filas
-        for(int j = 0;j<promedio.length;j++){
+        int promedios = 0;
+        int promedio[] = new int[filas];
+        
+        //Calcular promedio Filas
+        for(int j = 0;j<filas;j++){
             //Columnas
-            sumar = 0;
-            for(int k = 0;k<votos.length;k++){
-                sumar+= votos[k][j];
-                promedio[j] = sumar;
+            for(int k = 0;k<columnas;k++){
+                sumar+= votos[j][k];
+                promedio[j] = (sumar/7);
+                
             }
-            //System.out.println("valor de suma"+(j)+" "+sumar);
-            //sumar = 0;
+            sumar = 0;
         }
         
+        int totalPromedio = 0;
+        int contadorPromedio = 0;
+        int contador = 0;
         //Mostrar promedio
-        for(int j = 0;j<promedio.length;j++){
-            System.out.println("valor de suma"+(j)+" "+promedio[j]);
-        
+        for(int i = 0;i<promedio.length;i++){
+            promedios += promedio[i];
+            totalPromedio = promedios / 5;
+            
+            while(contadorPromedio > promedio.length){
+                if(totalPromedio > promedio[i]){
+                    System.out.println("valorPromedio"+promedio[i]);
+                    System.out.println("es mayor"+totalPromedio);
+                    contadorPromedio++; 
+                }
+                break;
+            }
+            
+            System.out.println("Promedio de candidatos :"+promedio[i]);
         }
+        System.out.println("Cantidad de candidatos mayores al promedio:"+contadorPromedio);
+        
+        System.out.println("total promedio"+totalPromedio);
         
 
 
@@ -105,8 +117,10 @@ public class VotacionesSena {
             }
            System.out.println();
         }
-        //System.out.println("\n"+"El valor mayor de la matriz es:"+valorCeroCero);
-        //System.out.println("El valor menor de la matriz es:"+valorMenor+"\n");
+        
+        
+        System.out.println("\n"+"El valor mayor de la matriz es:"+valorCeroCero);
+        System.out.println("El valor menor de la matriz es:"+valorMenor+"\n");
     }
     
 }
