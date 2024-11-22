@@ -22,16 +22,22 @@ public class VotacionesSena {
         int votos [][] = new int [5][7];
         //Filas
         int valores = 0;
-        int valorMayor = 0;
         //Mostrar dato
-        String candidatosArr[] = new String[5];
-        String candidatos = "";
-        String cantidadVotos = "";
+        int sumar = 0;
+        int promedios = 0;
         int filas = votos.length;
         int columnas = votos[0].length;
-        int valorCeroCero = votos[0][0];
-        int valorMenor = votos[0][0];
+        int promedio[] = new int[filas];
+        int totalPromedio = 0;
+        int contadorPromedio = 0;
+        int valorMayor = votos[0][0];
+        int valorMenor = 10000;
+        int promedioMenor = 0;
+        int promedioMayor = 0;
+        int candidatoGanador = promedio[0];
+        int posicionCandidatoGanador = 0;
         
+        //Insertar datos aleatorios en la matriz
         for(int f=0;f<votos.length;f++){
             //Columnas
             for(int c=0;c<votos[0].length;c++){
@@ -42,40 +48,49 @@ public class VotacionesSena {
                     valores = (int) (Math.random()*1000);
                     if(valores > 10){
                         votos[f][c] = valores;
+                        
                         break;
-                    }        
+                    } 
                 }
             
             }
         }
-
+        
+        
+        //Mostrar votos
+        System.out.println("Cantidad de votos:");
+        for(int f=0;f<votos.length;f++){
+           //Columnas = coloco 0 para poder mostrar las columnas
+           for(int c=0;c<votos[0].length;c++){
+               
+               System.out.print(votos[f][c]+" ");
+               
+            }
+           System.out.println("Candidato: #"+(f+1));
+        }
         
         
         //Calcular mayor y menor
-        for(int j=0;j<votos.length;j++){
-            for(int k = 0;k<votos[0].length;k++){
+        for(int f=0;f<votos.length;f++){
+            for(int c = 0;c<votos.length;c++){
                 //Mayor votos
-                if(votos[j][k] > valorCeroCero){
-                    valorCeroCero = votos[j][k];
+                if(votos[f][c] > valorMayor){
+                    valorMayor = votos[f][c];
                 }
-                //Menor votos
-                if(votos[j][k] < valorMenor){
-                    valorMenor = votos[j][k];
+                if(votos[f][c] < valorMenor){
+                    valorMenor = votos[f][c];
                 }
             }
         }
         
         
+        System.out.println("\n"+"""
+                           Mayor cantidad de votos totales: """+valorMayor+"\n"+
+                            """
+                           Menor cantidad de votos totales: """+valorMenor+"\n");
 
-        int sumar = 0;
-        int promedios = 0;
-        int promedio[] = new int[filas];
         
         
-        
-        int totalPromedio = 0;
-        int contadorPromedio = 0;
-        int contador = 0;
         //Calcular promedio Filas
         for(int j = 0;j<filas;j++){
             //Columnas
@@ -87,10 +102,22 @@ public class VotacionesSena {
             sumar = 0;
         }
         
-        int promedioMenor = 0;
-        int promedioMayor = 0;
-        int candidatoGanador = promedio[0];
-        int posicionCandidatoGanador = 0;
+        //Mostrar promedio
+        System.out.println("*************************"+"\n");
+        System.out.println("VALOR DEL PROMEDIO");
+        System.out.println("Se suma los centros y se divide sobre el número de centros");
+        System.out.println("Se extrae el promedio de los votantes para determinar ");
+        System.out.println("la cantidad de votos mayores y menores al promedio"+"\n");
+        
+        System.out.println("*************************"+"\n");
+        
+        for(int j = 0;j<promedio.length;j++){
+            System.out.println("Promedio del candidato #"+(j+1)+" "+promedio[j]);
+        
+        }
+        
+        System.out.println("\n"+"*************************");
+        
         //Calcular mayor Promedio y candidato ganador
         for(int j = 0;j<promedio.length;j++){
             promedios += promedio[j];
@@ -101,16 +128,19 @@ public class VotacionesSena {
             
         }
         
-        System.out.println("Candidato ganador #"+posicionCandidatoGanador+" "+"Cantidad de votos:"+candidatoGanador);
+        
+        System.out.println("Candidato ganador #"+(posicionCandidatoGanador+1)+" "+"Cantidad de votos por promedio:"+candidatoGanador);
+        
+        
+        System.out.println("*************************");
         
         
         totalPromedio = promedios / 5;
         
+        //Calcular ganador
         while(contadorPromedio < promedio.length){
                 
             if(totalPromedio < promedio[contadorPromedio]){
-                System.out.println("valorPromedioMayor"+promedio[contadorPromedio]);
-                System.out.println("es mayor"+totalPromedio);
                 promedioMayor++;
 
             }else{
@@ -120,30 +150,10 @@ public class VotacionesSena {
             contadorPromedio++; 
         }
 
-        
         System.out.println("Cantidad de valores menores al promedio"+promedioMenor);
-        System.out.println("Cantidad de valores mayores al promedio"+promedioMayor);    
-            
-        
-        
-        
+        System.out.println("Cantidad de valores mayores al promedio"+promedioMayor);
+        System.out.println("*************************");
 
-        //Mostrar votos
-//        for(int f=0;f<votos.length;f++){
-//           //Columnas = coloco 0 para poder mostrar las columnas
-//           for(int c=0;c<votos[0].length;c++){
-//               
-//               System.out.print(" "+votos[f][c]);
-//               
-//            }
-//           System.out.println();
-//        }
-        
-        
-//        System.out.println("\n"+"El valor mayor de la matriz es:"+valorCeroCero);
-//        System.out.println("El valor menor de la matriz es:"+valorMenor+"\n");
-//    }
-    
     }
     
 }
