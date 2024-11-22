@@ -127,10 +127,7 @@ public class VotacionesSena {
             }
             
         }
-        
-        
         System.out.println("Candidato ganador #"+(posicionCandidatoGanador+1)+" "+"Cantidad de votos por promedio:"+candidatoGanador);
-        
         
         System.out.println("*************************");
         
