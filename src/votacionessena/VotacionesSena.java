@@ -58,15 +58,16 @@ public class VotacionesSena {
         
         
         //Mostrar votos
-        System.out.println("Cantidad de votos:");
+        System.out.println("Cantidad de votos:"+"\n");
         for(int f=0;f<votos.length;f++){
            //Columnas = coloco 0 para poder mostrar las columnas
+           System.out.print("Candidato: #"+(f+1)+"- ");
            for(int c=0;c<votos[0].length;c++){
                
                System.out.print(votos[f][c]+" ");
                
             }
-           System.out.println("Candidato: #"+(f+1));
+           System.out.println(""+"\n");
         }
         
         
